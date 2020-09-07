@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{34036844-64E7-43A5-9151-4AD90E180989}") = "IOTEdge.WebAPI", "IOTEdge.WebAPI\IOTEdge.WebAPI.iotedgeproj", "{26654113-2C78-4FBE-BE61-7B144534234D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIIOTEdge", "WebAPIIOTEdge\WebAPIIOTEdge.csproj", "{E2BEF17B-4CB9-4B0B-9F65-56D346244951}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26654113-2C78-4FBE-BE61-7B144534234D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26654113-2C78-4FBE-BE61-7B144534234D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26654113-2C78-4FBE-BE61-7B144534234D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26654113-2C78-4FBE-BE61-7B144534234D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BEF17B-4CB9-4B0B-9F65-56D346244951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BEF17B-4CB9-4B0B-9F65-56D346244951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BEF17B-4CB9-4B0B-9F65-56D346244951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BEF17B-4CB9-4B0B-9F65-56D346244951}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D19D70A-7E05-4748-8C39-8AAA37BE4B84}
+	EndGlobalSection
+EndGlobal
