@@ -82,7 +82,7 @@ namespace WebAPIIOTEdge
 
         static async Task SendingMessage()
         {
-             
+
             var manifestMsg = new Message(Encoding.UTF8.GetBytes("Sample web api message test."));
 
             manifestMsg.Properties.Add("message-class", "informational");

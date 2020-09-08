@@ -9,7 +9,9 @@
           "settings": {
             "minDockerVersion": "v1.25",
             "loggingOptions": "",
-            "registryCredentials": {}
+            "registryCredentials": {
+              //Container registry details over here
+            }
           }
         },
         "systemModules": {
@@ -43,6 +45,12 @@
                       {
                         "HostPort": "443"
                       }
+                    ],
+                    "8080/tcp": [
+                      {
+                        "HostPort": "80"
+
+                      } 
                     ]
                   }
                 }
@@ -57,7 +65,7 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.WebAPIIOTEdge.amd64}",
+              "image": "${MODULES.WebAPIIOTEdge}", //need to get how does it picks latest image.
               "createOptions": {}
             }
           }

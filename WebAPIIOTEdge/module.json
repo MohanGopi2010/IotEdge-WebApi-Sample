@@ -1,0 +1,17 @@
+{
+  "$schema-version": "0.0.1",
+  "description": "Sample web api project into iot edge module.",
+  "image": {
+    "repository": "{acr-url}/WebAPIIOTEdge",
+    "tag": {
+      "version": "0.0.1",
+      "platforms": {
+        "arm64v8": "./Dockerfile"
+      }
+    },
+    "buildOptions": [],
+    "contextPath": "./"
+  },
+  "language": "csharp"
+}
+
