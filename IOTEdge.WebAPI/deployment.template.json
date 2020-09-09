@@ -45,12 +45,6 @@
                       {
                         "HostPort": "443"
                       }
-                    ],
-                    "8080/tcp": [
-                      {
-                        "HostPort": "80"
-
-                      } 
                     ]
                   }
                 }
@@ -66,7 +60,19 @@
             "restartPolicy": "always",
             "settings": {
               "image": "${MODULES.WebAPIIOTEdge}", //need to get how does it picks latest image.
-              "createOptions": {}
+              "createOptions": {
+                "HostConfig": {
+                  "PortBindings": {
+                    "8080/tcp": [
+                      {
+                        "HostPort": "80"
+
+                      }
+                    ]
+                  }
+                }
+
+              }
             }
           }
 
