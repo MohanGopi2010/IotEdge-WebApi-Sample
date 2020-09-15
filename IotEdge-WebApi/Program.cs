@@ -10,10 +10,10 @@ using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
-namespace WebAPIIOTEdge
+namespace IotEdge_WebApi
 {
+   
     public class Program
     {
         static int counter;
@@ -21,10 +21,8 @@ namespace WebAPIIOTEdge
         public static void Main(string[] args)
         {
             Init().Wait();
-
             CreateHostBuilder(args).Build().Run();
-
-            // Wait until the app unloads or is cancelled
+            //// Wait until the app unloads or is cancelled
             var cts = new CancellationTokenSource();
             AssemblyLoadContext.Default.Unloading += (ctx) => cts.Cancel();
             Console.CancelKeyPress += (sender, cpe) => cts.Cancel();
@@ -143,6 +141,5 @@ namespace WebAPIIOTEdge
                 return MessageResponse.Abandoned;
             }
         }
-
     }
 }

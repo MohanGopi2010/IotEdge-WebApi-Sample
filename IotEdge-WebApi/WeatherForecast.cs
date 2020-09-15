@@ -1,6 +1,6 @@
 using System;
 
-namespace WebAPIIOTEdge
+namespace IotEdge_WebApi
 {
     public class WeatherForecast
     {

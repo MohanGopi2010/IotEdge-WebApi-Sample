@@ -1,5 +1,4 @@
 {
-  "$schema-template": "2.0.0",
   "modulesContent": {
     "$edgeAgent": {
       "properties.desired": {
@@ -23,7 +22,7 @@
             "type": "docker",
             "settings": {
               "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
-              "createOptions": {}
+              "createOptions": "{}"
             }
           },
           "edgeHub": {
@@ -32,27 +31,7 @@
             "restartPolicy": "always",
             "settings": {
               "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
-              "createOptions": {
-                "HostConfig": {
-                  "PortBindings": {
-                    "5671/tcp": [
-                      {
-                        "HostPort": "5671"
-                      }
-                    ],
-                    "8883/tcp": [
-                      {
-                        "HostPort": "8883"
-                      }
-                    ],
-                    "443/tcp": [
-                      {
-                        "HostPort": "443"
-                      }
-                    ]
-                  }
-                }
-              }
+              "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}],\"443/tcp\":[{\"HostPort\":\"443\"}]}}}"
             }
           }
         },
@@ -64,7 +43,7 @@
             "restartPolicy": "always",
             "settings": {
               "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
-              "createOptions": {}
+              "createOptions": "{}"
             }
           },
           "TestModule": {
@@ -73,8 +52,8 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULEDIR<../TestModule>}",
-              "createOptions": {}
+              "image": "doveracrpractice.azurecr.io/testmodule:0.0.1-windows-amd64",
+              "createOptions": "{}"
             }
           },
           "IotEdgeWebApi": {
@@ -83,18 +62,8 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULEDIR<../IotEdge-WebApi>}",
-              "createOptions": {
-                "HostConfig": {
-                  "PortBindings": {
-                    "10000/tcp": [
-                      {
-                        "HostPort": "10000"
-                      }
-                    ] 
-                  }
-                }
-              }
+              "image": "doveracrpractice.azurecr.io/iotedgewebapi:0.0.4-windows-amd64",
+              "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"10000/tcp\":[{\"HostPort\":\"10000\"}]}}}"
             }
           }
         }

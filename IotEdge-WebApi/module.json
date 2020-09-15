@@ -1,0 +1,23 @@
+{
+  "$schema-version": "0.0.1",
+  "description": "Sample web api project into iot edge module.",
+  "image": {
+    "repository": "doveracrpractice.azurecr.io/iotedgewebapi",
+    "tag": {
+      "version": "0.0.4",
+      "platforms": {
+        "amd64": "./Dockerfile.amd64",
+        "windows-amd64": "./Dockerfile.windows-amd64", 
+        "amd64.debug": "./Dockerfile.amd64.debug",
+        "arm32v7": "./Dockerfile.arm32v7",
+        "arm32v7.debug": "./Dockerfile.arm32v7.debug",
+        "arm64v8": "./Dockerfile.arm64v8",
+        "arm64v8.debug": "./Dockerfile.arm64v8.debug" 
+      }
+    },
+    "buildOptions": [],
+    "contextPath": "./"
+  },
+  "language": "csharp"
+}
+

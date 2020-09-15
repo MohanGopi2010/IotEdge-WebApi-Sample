@@ -22,6 +22,10 @@
     <None Include="deployment.template.json" />
     <None Include="deployment.debug.template.json" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IotEdge-WebApi\IotEdgeWebApi.csproj" />
+    <ProjectReference Include="..\TestModule\TestModule.csproj" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsRoot)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Azure IoT Edge Tools\AzureIoTEdgeProject.Build.targets" />
   <Import Project="$(MSBuildToolsRoot)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Azure IoT Edge Tools\AzureIoTEdgeProject.Build.props" />
 </Project>

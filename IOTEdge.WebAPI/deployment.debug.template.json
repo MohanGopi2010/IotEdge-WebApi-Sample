@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema-template": "2.0.0",
   "modulesContent": {
     "$edgeAgent": {
@@ -9,7 +9,13 @@
           "settings": {
             "minDockerVersion": "v1.25",
             "loggingOptions": "",
-            "registryCredentials": {}
+            "registryCredentials": {
+              "doveracrpractice": {
+                "username": "{}",
+                "password": "{}",
+                "address": "{}"
+              }
+            }
           }
         },
         "systemModules": {
@@ -43,11 +49,6 @@
                       {
                         "HostPort": "443"
                       }
-                    ],
-                    "8080/tcp": [
-                      {
-                        "HostPort": "80"
-                      }
                     ]
                   }
                 }
@@ -56,13 +57,33 @@
           }
         },
         "modules": {
-          "WebAPIIOTEdge": {
+          "SimulatedTemperatureSensor": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.WebAPIIOTEdge.amd64}",
+              "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
+              "createOptions": {}
+            }
+          },
+          "TestModule": {
+            "version": "1.0.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULEDIR<../TestModule>.debug}",
+              "createOptions": {}
+            }
+          },
+          "IotEdgeWebApi": {
+            "version": "1.0.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULEDIR<../IotEdge-WebApi>.debug}",
               "createOptions": {}
             }
           }
@@ -73,7 +94,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "WebAPIIOTEdgeToIotHub": "FROM /messages/modules/WebAPIIOTEdge/outputs/* INTO $upstream"
+          "TestModuleToIoTHub": "FROM /messages/modules/TestModule/outputs/* INTO $upstream",
+          "IotEdgeWebApiToIoTHub": "FROM /messages/modules/IotEdgeWebApi/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
