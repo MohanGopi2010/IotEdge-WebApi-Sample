@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Loader;
 using System.Text;
 using System.Threading;
@@ -49,17 +50,25 @@ namespace IotEdge_WebApi
         {
 
 
-            Console.WriteLine("Entered CreateHostBuilder.");
+            Console.WriteLine("Entered CreateHostBuilder_V4.");
+            //  System.Net.IPAddress vNatIpAddress = GetVNatIpAddress();
 
             try
             {
+                System.Net.IPAddress.TryParse("0.0.0.0", out var address);
 
-                return WebHost.CreateDefaultBuilder(args)
-                   .UseUrls($"http://+:10000")
-                   .UseKestrel()
+                var host = WebHost.CreateDefaultBuilder(args)
+                   .UseKestrel(options =>
+                   {
+                       options.Listen(address, 10000);
+                   })
                    .UseSerilog((ctx, config) => { config.ReadFrom.Configuration(ctx.Configuration); })
                    .UseStartup<Startup>()
+                   .UseUrls($"http://{address}:10000")
                    ;
+                Console.WriteLine($"Now Listening:http:// {address}:10000");
+
+                return host;
             }
             catch (Exception ex)
             {
@@ -69,6 +78,19 @@ namespace IotEdge_WebApi
             }
 
         }
+
+        private static System.Net.IPAddress GetVNatIpAddress()
+        {
+            return System.Net.NetworkInformation.NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(n => n.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up)
+                .Where(n => n.NetworkInterfaceType != System.Net.NetworkInformation.NetworkInterfaceType.Loopback)
+                .Where(n => !string.IsNullOrEmpty(n.Name) && n.Name.Equals("vEthernet (nat)", StringComparison.OrdinalIgnoreCase))
+                .SelectMany(n => n.GetIPProperties()?.UnicastAddresses).Where(vNat => vNat != null && vNat.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                .Select(vNat => vNat.Address)
+                .FirstOrDefault();
+        }
+
 
 
 

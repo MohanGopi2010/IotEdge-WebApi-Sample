@@ -4,7 +4,7 @@
   "image": {
     "repository": "doveracrpractice.azurecr.io/iotedgewebapi",
     "tag": {
-      "version": "0.0.9",
+      "version": "0.0.14",
       "platforms": { 
         "windows-amd64": "./Dockerfile.windows-amd64"
       }

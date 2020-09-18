@@ -28,8 +28,8 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
-      "useSSL": true,
-      "httpPort": 10000
+      "useSSL": true //,
+      //"httpPort": 10000
     }
   }
 }
