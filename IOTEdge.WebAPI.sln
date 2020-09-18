@@ -7,7 +7,7 @@ Project("{34036844-64E7-43A5-9151-4AD90E180989}") = "IOTEdge.WebAPI", "IOTEdge.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotEdgeWebApi", "IotEdge-WebApi\IotEdgeWebApi.csproj", "{1CE27517-DA8B-4FB1-9188-9C7630BCC370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestModule", "TestModule\TestModule.csproj", "{471C5827-B733-40DD-9589-3FC5777B2C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestModule", "TestModule\TestModule.csproj", "{471C5827-B733-40DD-9589-3FC5777B2C26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

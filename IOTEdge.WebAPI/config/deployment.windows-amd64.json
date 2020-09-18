@@ -62,8 +62,8 @@
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "doveracrpractice.azurecr.io/iotedgewebapi:0.0.4-windows-amd64",
-              "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"10000/tcp\":[{\"HostPort\":\"10000\"}]}}}"
+              "image": "doveracrpractice.azurecr.io/iotedgewebapi:0.0.9-windows-amd64",
+              "createOptions": "{\"ExposedPorts\":{\"10000/tcp\":{}},\"HostConfig\":{\"PortBindings\":{\"10000/tcp\":[{\"HostPort\":\"10000\"}]}}}"
             }
           }
         }

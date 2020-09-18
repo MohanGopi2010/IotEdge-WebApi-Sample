@@ -1,27 +1,43 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Loader;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.EventLog;
+using Serilog;
 
 namespace IotEdge_WebApi
 {
-   
+
     public class Program
     {
         static int counter;
         static ModuleClient _moduleClient = null;
         public static void Main(string[] args)
         {
+            Console.WriteLine("Starting Init.");
             Init().Wait();
-            CreateHostBuilder(args).Build().Run();
+            Console.WriteLine("Compeleted Init.");
+
+            var datetime = DateTime.Now.ToString();
+            Console.WriteLine($"***********{DateTime.Now}***********");
+            Console.WriteLine("Starting HostBuilder");
+
+            var host = CreateHostBuilder(args).Build();
+            Console.WriteLine("Completed HostBuilder.");
+
+            Console.WriteLine("Started Host.Run().");
+            host.Run();
+            Console.WriteLine("Completed Host.Run().");
+
+            Console.WriteLine("Passed host run");
+
             //// Wait until the app unloads or is cancelled
             var cts = new CancellationTokenSource();
             AssemblyLoadContext.Default.Unloading += (ctx) => cts.Cancel();
@@ -29,12 +45,32 @@ namespace IotEdge_WebApi
             WhenCancelled(cts.Token).Wait();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IWebHostBuilder CreateHostBuilder(string[] args)
+        {
+
+
+            Console.WriteLine("Entered CreateHostBuilder.");
+
+            try
+            {
+
+                return WebHost.CreateDefaultBuilder(args)
+                   .UseUrls($"http://+:10000")
+                   .UseKestrel()
+                   .UseSerilog((ctx, config) => { config.ReadFrom.Configuration(ctx.Configuration); })
+                   .UseStartup<Startup>()
+                   ;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to complete CreateHostBuilder.");
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+
+        }
+
+
 
         /// <summary>
         /// Handles cleanup operations when app is cancelled or unloads
@@ -56,7 +92,7 @@ namespace IotEdge_WebApi
 
             {
                 // MqttTransportSettings mqttSetting = new MqttTransportSettings(TransportType.Mqtt_Tcp_Only);
-                AmqpTransportSettings amqpSetting = new AmqpTransportSettings(TransportType.Amqp_Tcp_Only);
+                AmqpTransportSettings amqpSetting = new AmqpTransportSettings(Microsoft.Azure.Devices.Client.TransportType.Amqp_Tcp_Only);
                 ITransportSettings[] settings = { amqpSetting };
                 // return new ModuleClientAdapter(settings);
 

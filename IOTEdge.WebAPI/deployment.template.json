@@ -85,13 +85,18 @@
             "settings": {
               "image": "${MODULEDIR<../IotEdge-WebApi>}",
               "createOptions": {
+                "ExposedPorts": {
+                  "10000/tcp": {
+
+                  }
+                },
                 "HostConfig": {
                   "PortBindings": {
                     "10000/tcp": [
                       {
                         "HostPort": "10000"
                       }
-                    ] 
+                    ]
                   }
                 }
               }

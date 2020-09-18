@@ -4,16 +4,18 @@
 #For more information, please see https://aka.ms/containercompat
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-nanoserver-1809 AS base
-WORKDIR /app
+WORKDIR /app 
 EXPOSE 80
-EXPOSE 443
+EXPOSE 443 
+ENV ASPNETCORE_URLS=http://+:10000
+EXPOSE 10000
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-nanoserver-1809 AS build
 WORKDIR /src
-COPY ["IotEdge-WebApi/IotEdgeWebApi.csproj", "IotEdge-WebApi/"]
-RUN dotnet restore "IotEdge-WebApi/IotEdgeWebApi.csproj"
+COPY ["IotEdgeWebApi.csproj", ""]
+RUN dotnet restore "./IotEdgeWebApi.csproj"
 COPY . .
-WORKDIR "/src/IotEdge-WebApi"
+WORKDIR "/src/."
 RUN dotnet build "IotEdgeWebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
